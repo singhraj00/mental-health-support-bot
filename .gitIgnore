@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.sqlite3
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+
+# Streamlit cache
+.streamlit/
+.streamlit/secrets.toml
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Sensitive configs
+.env
+firebase_keys.json
+firebase_config.json
