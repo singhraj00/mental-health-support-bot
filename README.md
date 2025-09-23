@@ -22,7 +22,7 @@ This chatbot does **not** provide medical advice or diagnosis. If you are in cri
 ---
 
 ## 📂 Project Structure
-
+```
 mental_health_chatbot/
 │── app.py # 🎨 Streamlit UI (entry point)
 │── .env # 🔑 Environment variables
@@ -45,7 +45,7 @@ mental_health_chatbot/
 │
 └── utils/
 └── vector_db.py # 📚 Vector DB (Chroma) setup
-
+```
 
 ---
 
