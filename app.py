@@ -1,7 +1,6 @@
 import os
 import streamlit as st
 from streamlit_cookies_manager import EncryptedCookieManager
-
 from auth.user_auth import signup, login
 from db.chat_db import get_user_chats, create_new_chat, save_message
 from llm.llm_setup import initialize_llm
@@ -84,14 +83,21 @@ def main():
         st.info("Start a new chat from the sidebar.")
 
     if user_input := st.chat_input("How are you feeling today?"):
+        # Display user message
         st.chat_message("user").markdown(user_input)
+
+        # Generate assistant response
         with st.chat_message("assistant"):
-            placeholder, full_response = st.empty(), ""
-            for chunk in qa_chain.run(user_input).split():
-                full_response += chunk + " "
-                placeholder.markdown(full_response)
+            placeholder = st.empty()
+            full_response = qa_chain.run(user_input)
+
+            # Stream response line by line (preserves formatting)
+            for line in full_response.split("\n"):
+                placeholder.markdown(line, unsafe_allow_html=True)
+
+        # Save messages
         save_message(st.session_state["user"], selected_chat, "user", user_input)
-        save_message(st.session_state["user"], selected_chat, "assistant", full_response)
+        save_message(st.session_state["user"], selected_chat, "assistant", full_response)   
 
 
 if __name__ == "__main__":

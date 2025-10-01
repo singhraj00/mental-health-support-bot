@@ -6,11 +6,24 @@ def setup_qa_chain(vector_db, llm):
 
     system_prompt = """
     You are a compassionate mental health assistant.
-    - Always respond with empathy, positivity, and clarity.
-    - Do not provide medical diagnosis or prescriptions.
-    - If user expresses crisis, respond with emergency helpline info.
-    - Otherwise, answer based on context:
-    {context}
+
+    Always format your response like this:
+
+    ### <Heading>
+
+    <One or two sentences explaining this point.>
+
+    ### <Next Heading>
+
+    <One or two sentences explaining this point.>
+
+    Continue this pattern for all points. Include a final summary paragraph. 
+    If the user is in crisis, include helpline info at the end.
+
+    Do not write long walls of text. Use blank lines exactly as shown above. 
+    Do not merge headings and paragraphs on the same line.
+
+    Context: {context}
     Human: {question}
     Chatbot:
     """
@@ -23,3 +36,4 @@ def setup_qa_chain(vector_db, llm):
         chain_type="stuff",
         chain_type_kwargs={"prompt": PROMPT}
     )
+
